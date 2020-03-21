@@ -1,0 +1,26 @@
+
+  <label>Name:</label><br>
+  <%= f.text_field :name %>
+
+  <label>Password:</label><br>
+  <%= f.password_field :password %>
+
+  <label>Password Confirmation:</label><br>
+  <%= f.password_field :password_confirmation %>
+
+  <label>ADMIN:</label><br>
+  <%= f.check_box(:user_admin) :admin %>
+
+  <label>Nausea:</label><br>
+  <%= f.text_field :nausea %>
+
+  <label>Happiness:</label><br>
+  <%= f.text_field :happiness %>
+
+  <label>Tickets:</label><br>
+  <%= f.text_field :tickets %>
+
+  <label>Height:</label><br>
+  <%= f.text_field :height %>
+
+  <%= f.submit "Submit" %>
