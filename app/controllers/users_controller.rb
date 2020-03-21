@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_login
-  skip_before_action :new, :create
+  skip_before_action :require_login, only: [:new, :create]
 
   def new
     @user = User.new
@@ -8,18 +8,25 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    redirect_to "new" unless @user.save
-    redirect_to user_path(@user)
+    #binding.pry
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
+    else
+      binding.pry
+      render "new"
+    end
   end
 
   def show
     @user = User.find(params[:id])
+    #@message = params[:message]
   end
 
   private
 
-  def users_params
-    params.require(:user).permit(:name, :nausea, :happiness, :tickets, :height, :password_digest)
+  def user_params
+    params.require(:user).permit(:name, :nausea, :happiness, :tickets, :height, :password, :admin)
   end
 
   def require_login

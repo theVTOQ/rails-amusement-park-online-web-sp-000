@@ -2,8 +2,9 @@ class User < ApplicationRecord
   has_secure_password
   has_many :rides
   has_many :attractions, through: :rides
+  validates_inclusion_of :admin, in: [true, false]
 
-  before_save :default_values
+  before_validation :default_values
 
   def mood
     self.nausea > self.happiness ? 'sad' : 'happy'
@@ -26,5 +27,8 @@ class User < ApplicationRecord
 
   def default_values
     self.admin ||= false
+    self.tickets ||= 0
+    self.nausea ||= 0
+    self.happiness ||= 0
   end
 end

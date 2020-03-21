@@ -1,0 +1,8 @@
+<h1>Attractions:</h1>
+<ul>
+  <% @attractions.each do |attraction| %>
+    <li><%= link_to "#{prefix} #{attraction.name}", attraction %></li>
+  <% end %>
+</ul>
+
+<%= link_to("New Attraction", "/attractions/new") if current_user_is_admin %>
