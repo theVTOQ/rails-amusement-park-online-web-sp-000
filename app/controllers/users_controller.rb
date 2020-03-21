@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   include ApplicationHelper
 
   def new
-    redirect_to "show" if logged_in
+    #redirect_to "show" if logged_in
     @user = User.new
   end
 
