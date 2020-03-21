@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   before_action :require_login
   skip_before_action :require_login, only: [:new, :create]
+  include ApplicationHelper
 
   def new
+    #redirect_to "show" if logged_in
     @user = User.new
   end
 
@@ -14,13 +16,18 @@ class UsersController < ApplicationController
       redirect_to user_path(@user)
     else
       binding.pry
-      render "new"
+      #render "new"
+      redirect_to "/"
     end
   end
 
   def show
-    redirect_to "/" unless logged_in && current_user.id == params[:id].to_i
-    @user = User.find(params[:id])
+    if logged_in && current_user.id == params[:id].to_i
+      @user = User.find(params[:id])
+    else
+      #binding.pry
+      redirect_to "/"
+    end
     #@message = params[:message]
   end
 
