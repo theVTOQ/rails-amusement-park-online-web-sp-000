@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    redirect_to "/" unless logged_in && current_user.id == params[:id].to_i
     @user = User.find(params[:id])
     #@message = params[:message]
   end
