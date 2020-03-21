@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
-      #binding.pry
+      binding.pry
       #render "new"
       redirect_to "/"
     end
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     if logged_in && current_user.id == params[:id].to_i
       @user = User.find(params[:id])
     else
-      binding.pry
+      #binding.pry
       redirect_to "/"
     end
     #@message = params[:message]
