@@ -1,7 +1,7 @@
 class Ride < ApplicationRecord
   belongs_to :user
   belongs_to :attraction
-  #after_validation :take_ride
+  #before_validation :take_ride
 
   def take_ride
     if user_tickets < tickets_needed && user_height < height_needed
@@ -25,6 +25,7 @@ class Ride < ApplicationRecord
       #self.user.increase_nausea(self.attraction.nausea_rating)
       increase_nausea_of_user
 
+      #self.save
       self.user.save
       "Thanks for riding the #{attraction_name}!"
     end

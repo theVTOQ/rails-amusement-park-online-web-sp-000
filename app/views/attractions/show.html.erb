@@ -3,10 +3,12 @@
 <% if current_user_is_admin %>
   <%=  link_to "Edit Attraction", "/attractions/#{@attraction.id}/edit" %>
 <%  else %>
-  <%= form_tag url: rides_path  do |f| %>
-    <%= f.hidden_field :user_id, @user.id %>
-    <%= f.hidden_field :attraction_id, @attraction.id %>
+  <%= form_tag rides_path do %>
+    
+    <%= hidden_field_tag :user_id, @user.id %>
+    <%= hidden_field_tag :attraction_id, @attraction.id %>
+    
 
-    <%= f.submit "Go on this ride" %>
+    <%= submit_tag "Go on this ride" %>
   <% end %>
 <% end %>

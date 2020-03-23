@@ -17,7 +17,7 @@ class AttractionsController < ApplicationController
   end
 
   def update
-    redirect_to "/edit" unless @attraction.save
+    redirect_to "/edit" unless @attraction.update(attractions_params)
     redirect_to attraction_path(@attraction)
   end
 
@@ -27,6 +27,7 @@ class AttractionsController < ApplicationController
 
   def show
     @user = current_user
+    #params[:attraction_id] = params[:id]
     #@ride = Ride.new(user_id: @user.id, attraction_id: @attraction.id)
   end
 

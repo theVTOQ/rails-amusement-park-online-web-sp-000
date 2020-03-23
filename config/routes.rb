@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   post "/signin", to: "sessions#create"
   get "/signout", to: "sessions#destroy"
   #get "/attractions", to: "attractions#index"
-  root "users#new"
+  root "attractions#welcome"
 end

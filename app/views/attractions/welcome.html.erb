@@ -1,0 +1,7 @@
+<h1>Welcome to the Rails Amusement Park!</h1>
+
+<% if logged_in %>
+    <%= link_to "See Attractions", attractions_path %>
+<% else %>
+    <%= link_to "Sign Up", "/signup" %> or <%= link_to "Sign In", "/signin" %>
+<% end %>

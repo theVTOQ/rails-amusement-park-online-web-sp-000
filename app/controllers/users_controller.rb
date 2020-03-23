@@ -10,25 +10,24 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    #binding.pry
     if @user.save
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
-      binding.pry
-      #render "new"
       redirect_to "/"
     end
   end
 
   def show
-    if logged_in && current_user.id == params[:id].to_i
-      @user = User.find(params[:id])
-    else
-      #binding.pry
+    if !logged_in 
       redirect_to "/"
+    elsif current_user.id != params[:id].to_i
+      redirect_to user_path(current_user), alert: "Access Denied"
     end
-    #@message = params[:message]
+    
+    @user = current_user
+    
+    @message = session[:message]
   end
 
   private
@@ -38,6 +37,7 @@ class UsersController < ApplicationController
   end
 
   def require_login
-    return head(:forbidden) unless session.include? :user_id
+    #return head(:forbidden) unless session.include? :user_id
+    redirect_to "/" unless session.include? :user_id
   end
 end
